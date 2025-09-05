@@ -1,0 +1,10 @@
+title: "Project Proposal: Process Control for OCT-In-The-Loop Bioprinting"
+author:
+  - Zane Bates, Department of Biomedical Engineering, CMU
+date: 2025-08-29
+keywords: [OCT, process control, photodegradable hydrogels, EmVP, GelMA, FRESH]
+fontsize: 12pt
+geometry: margin=1in
+linkcolor: blue
+toc: true
+toc-depth: 2

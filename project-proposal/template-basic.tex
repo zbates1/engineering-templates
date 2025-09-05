@@ -1,0 +1,208 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in, top=1.5in, bottom=1.25in]{geometry}
+
+% Professional document setup with enhanced readability
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% Enhanced readability settings
+\usepackage{setspace}
+\setstretch{1.15} % Slightly increased line spacing for better readability
+\setlength{\parindent}{0pt} % No paragraph indentation
+\setlength{\parskip}{6pt plus 2pt minus 1pt} % Space between paragraphs
+
+% Graphics and layout
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{afterpage}
+
+% Tables and formatting
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{ltxtable}
+\usepackage{calc}
+\usepackage{caption}
+
+% Define column types for better table handling
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% Colors and hyperlinks
+\usepackage{xcolor}
+\definecolor{cmuRed}{RGB}{187, 41, 49}
+\definecolor{cmuGray}{RGB}{89, 89, 89}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, 
+    linkcolor=black, 
+    urlcolor=blue, 
+    citecolor=cmuRed,
+    pdfborder={0 0 0}
+}
+
+% Math and text
+\usepackage{amsmath, amssymb}
+\usepackage{textcomp}
+\DeclareUnicodeCharacter{223C}{\ensuremath{\sim}}
+\usepackage{enumitem}
+% Enhanced list formatting for better readability
+\setlist{itemsep=4pt, parsep=2pt, topsep=6pt, partopsep=2pt}
+\setlist[itemize]{leftmargin=1.2em}
+\setlist[enumerate]{leftmargin=1.2em}
+
+% Professional section formatting with enhanced readability
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries\color{cmuRed}}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{cmuGray}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection}{1em}{}
+% Enhanced spacing for better readability
+\titlespacing\section{0pt}{18pt}{10pt}
+\titlespacing\subsection{0pt}{14pt}{8pt}
+\titlespacing\subsubsection{0pt}{12pt}{6pt}
+
+% Enhanced caption and table formatting for readability
+\captionsetup{labelfont=bf, font=small, skip=8pt}
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
+
+% Better table spacing
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{8pt}
+
+% Professional header and footer
+\pagestyle{fancy}
+\fancyhf{}
+
+% Header with logo (only on pages after title page) - no overlap design
+\fancyhead[L]{\raisebox{-0.2cm}{\includegraphics[height=0.7cm]{images/cmu_logo.png}}}
+\fancyhead[C]{}
+\fancyhead[R]{\small\textcolor{cmuGray}{OCT Bioprinting Process Control}}
+\fancyfoot[L]{\small\textcolor{cmuGray}{\today}}
+\fancyfoot[C]{\small\textcolor{cmuGray}{Page \thepage\ of \pageref{LastPage}}}
+\fancyfoot[R]{}
+
+% Custom header rule
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{cmuRed}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{cmuGray}\leaders\hrule height \footrulewidth\hfill}}
+
+% Title page style (no header/footer)
+\fancypagestyle{titlepage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% Define tightlist command for pandoc compatibility
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Define CSLReferences environment for bibliography
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% Add page break and section heading
+  \newpage
+  \phantomsection
+  \addcontentsline{toc}{section}{References}
+  \section*{References}
+  \markright{References} % For header
+  % don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{cslentry}
+ {\setlength{\parindent}{0pt}
+  \begingroup\raggedright}
+ {\par\endgroup}
+\newcommand{\cslblock}[1]{#1\hfill\break}
+\newcommand{\cslleftmargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\cslrightinline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\cslindent}[1]{\hspace{\cslhangindent}#1}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLEntry}[1]{#1}
+
+% Professional title page
+\makeatletter
+\renewcommand{\maketitle}{
+    \thispagestyle{titlepage}
+    \begin{center}
+        % Logo at top
+        \vspace*{0.5cm}
+        \includegraphics[height=2cm]{images/cmu_logo.png}
+        
+        \vspace{1.5cm}
+        
+        % Title
+        {\LARGE\bfseries\color{cmuRed} \@title \par}
+        
+        \vspace{0.8cm}
+        
+        % Author and affiliation
+        {\large \@author \par}
+        
+        \vspace{0.4cm}
+        
+        % Date
+        {\large \@date \par}
+        
+        \vfill
+        
+        % Footer line
+        {\small\textcolor{cmuGray}{\rule{\textwidth}{0.5pt}}}
+        
+        \vspace{0.3cm}
+        
+        % Department info
+        {\small\textcolor{cmuGray}{Department of Biomedical Engineering\\Carnegie Mellon University}}
+        
+        \vspace{0.5cm}
+    \end{center}
+    \newpage
+}
+\makeatother
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \\ $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$endif$
+
+\begin{document}
+\maketitle
+
+$if(toc)$
+\phantomsection
+\addcontentsline{toc}{section}{Contents}
+{\hypersetup{linkcolor=black}
+\tableofcontents}
+\newpage
+$endif$
+
+$body$
+
+\end{document}
