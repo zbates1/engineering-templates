@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pytest tests/unit/validators/test_file_validator.py::TestFileValidator::test_empty_yaml_frontmatter -v)",
+      "Bash(mkdir:*)",
+      "Bash(python -m pytest tests/unit/validators/test_file_validator.py -v)",
+      "Bash(python:*)",
+      "Bash(python -m pytest tests/unit/cli/test_pipeline_runner.py::TestPipelineExecution::test_health_checks_success -v)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

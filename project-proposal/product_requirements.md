@@ -2,27 +2,22 @@
 
 ## 1. Project Vision & Goal
 
-*What is the high-level goal of this project? What problem are we trying to solve?*
-
-**Example:**
-> To build a Python-based financial analysis system that automates budget tracking and report generation for the LTA Materials & Test department.
+To build a command-line document processing pipeline that converts Markdown files to professionally formatted PDFs using Pandoc and XeLaTeX, with configurable input and output directories for batch processing.
 
 ## 2. Key Features & User Stories
 
-*Describe the essential features. What should the system be able to do from a user's perspective?*
-
-**Example:**
-> - **As a department manager, I want to** load budget forecast and actual spending data from Excel files.
-> - **As an analyst, I want to** automatically calculate the variance between forecasted and actual spending for each month and year-to-date.
-> - **As a manager, I want to** generate a formatted PDF report summarizing the financial performance with a single command.
-> - **As an analyst, I want to** track the lifecycle of purchase orders to anticipate future spending.
+- **As a user, I want to** process multiple .md files from a specified input directory with a single command.
+- **As a user, I want to** specify custom input and output directories via command-line arguments.
+- **As a user, I want to** maintain bibliography and citation processing capabilities for academic documents.
+- **As a user, I want to** generate consistently formatted PDFs using the existing Pandoc + XeLaTeX backend.
+- **As a user, I want to** have sensible defaults (current directory for input, output/ for results) when directories aren't specified.
+- **As a user, I want to** process files in batch while preserving individual document settings and metadata.
 
 ## 3. Non-Functional Requirements
 
-*Are there any specific constraints or standards to follow?*
-
-**Example:**
-> - The system must be written in Python 3.8+.
-> - All financial reports must be generated in PDF format using the provided LaTeX templates.
-> - The code must be well-documented and include type hints.
-> - The final output must be verifiable with automated tests.
+- The system must maintain the existing Pandoc + XeLaTeX processing engine.
+- All bibliography and citation features must be preserved (BibTeX, CSL support).
+- The CLI must provide clear feedback on processing status and errors.
+- The system must handle multiple .md files efficiently in batch mode.
+- File organization must support template files, bibliography files, and image assets.
+- The solution must be cross-platform compatible (Windows, macOS, Linux).

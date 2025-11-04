@@ -1,46 +1,169 @@
-<p align="center">
-  <img src="images/cmu_logo.png" alt="CMU Logo" width="200"/>
-</p>
+# Markdown-to-PDF Pipeline
 
+A command-line tool for batch processing Markdown files into professionally formatted PDFs using Pandoc and XeLaTeX.
 
-# Proposals Starter (Markdown → Pandoc → PDF)
+## Features
 
-This repo is a ready-to-go template for writing in **Markdown** (exported from Notion) and compiling gorgeous PDFs via **Pandoc** + **XeLaTeX**.
+- **Batch Processing**: Process multiple .md files from a specified input directory
+- **Configurable Directories**: Set custom input and output directories via command-line arguments
+- **Bibliography Support**: Full BibTeX and CSL citation processing
+- **Template System**: Professional LaTeX templates for consistent formatting
+- **Cross-Platform**: Works on Windows, macOS, and Linux
 
-## Folder Layout
+## Quick Start
+
+```bash
+# Process all .md files in current directory, output to ./output/
+md2pdf
+
+# Process files from custom input directory
+md2pdf --input-dir ./docs --output-dir ./pdfs
+
+# Process with specific template
+md2pdf -i ./content -o ./results --template academic
 ```
-/closed-loop-bioink-proposal/
-  index.md         # Paste your Notion-exported Markdown here (or edit directly)
-  meta.yaml        # Title, author, TOC, margins, etc.
-  refs.bib         # Your BibTeX references (use Zotero + Better BibTeX)
-  template.tex     # Pandoc LaTeX template
-  images/          # Drop images referenced from Markdown
-  .github/workflows/build.yml  # Optional CI to build on every push
-  Makefile         # 'make pdf' builds proposal.pdf
-```
 
-## Setup
+## Installation
+
+### Prerequisites
+```bash
+# Install Pandoc (version 3.1.12.2+)
 wget https://github.com/jgm/pandoc/releases/download/3.1.12.2/pandoc-3.1.12.2-1-amd64.deb
 sudo dpkg -i pandoc-3.1.12.2-1-amd64.deb || sudo apt -f install -y
-sudo snap install tectonic
+
+# Install XeLaTeX and fonts
 sudo apt install -y texlive-xetex texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra
 
-## Using with Notion
-1. Write in Notion using headings, lists, and inline math (`$...$`) or display math (`$$...$$`).
-2. **Export** → *Markdown & CSV*.
-3. Drop the exported `index.md` + `images/` into this folder (replace the starter files).
-4. Run `make pdf` (or the pandoc command above).
+# Alternative: Use Tectonic for faster builds
+sudo snap install tectonic
+```
 
-## Citations
-- Manage references in **Zotero** with **Better BibTeX**.
-- Set your library/collection to auto‑export to `refs.bib` in this folder.
-- Cite inline like `[@key]` or "Smith (2024) [@key]". Choose a CSL (e.g., `ieee.csl`, `nature.csl`).
+### Install Pipeline
+```bash
+pip install markdown-pdf-pipeline
+# or
+git clone <repository> && cd markdown-pdf-pipeline && pip install -e .
+```
 
-## Customization
-- Adjust fonts/margins/colors in `template.tex`.
-- Add front‑matter in `meta.yaml` (title, authors, keywords, TOC).
-- Add Make targets (e.g., `make docx`) if you want other outputs.
+## File Structure
+
+Your project directory can be organized like this:
+```
+project/
+├── content/              # Input .md files
+│   ├── chapter1.md
+│   ├── chapter2.md
+│   └── images/           # Referenced images
+├── bibliography/
+│   └── refs.bib          # BibTeX references
+├── output/               # Generated PDFs
+└── templates/            # Custom LaTeX templates (optional)
+```
+
+## Markdown Format
+
+### Frontmatter (YAML)
+```yaml
+---
+title: "Document Title"
+author: "Your Name"
+date: "2025-09-05"
+bibliography: refs.bib
+csl: ieee.csl
+---
+```
+
+### Citations
+- Inline: `Smith et al. [@smith2024] showed that...`
+- Multiple: `[@smith2024; @jones2023]`
+- Parenthetical: `This is well established [@smith2024].`
+
+### Math Support
+- Inline: `The equation $E = mc^2$ shows...`
+- Display: `$$\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}$$`
+
+## Command-Line Options
+
+```bash
+md2pdf [OPTIONS]
+
+Options:
+  -i, --input-dir PATH     Input directory containing .md files [default: current directory]
+  -o, --output-dir PATH    Output directory for PDFs [default: ./output]
+  -t, --template NAME      LaTeX template to use [default: default]
+  --bib-dir PATH           Directory containing bibliography files
+  --clean                  Remove temporary files after processing
+  --verbose                Show detailed processing information
+  --help                   Show this message and exit
+```
+
+## Bibliography Management
+
+### Zotero + Better BibTeX (Recommended)
+1. Install **Better BibTeX** plugin in Zotero
+2. Configure auto-export to `refs.bib` in your project
+3. Use citation keys like `@smith2024` in your Markdown
+
+### Manual BibTeX
+Create a `refs.bib` file:
+```bibtex
+@article{smith2024,
+  title={Advanced Markdown Processing},
+  author={Smith, John and Doe, Jane},
+  journal={Journal of Document Processing},
+  year={2024},
+  volume={15},
+  pages={123--145}
+}
+```
+
+## Templates
+
+Built-in templates:
+- `default`: Clean, professional layout
+- `academic`: Suitable for research papers
+- `proposal`: Formatted for project proposals
+- `minimal`: Lightweight design
+
+### Custom Templates
+Place `.tex` files in the `templates/` directory and reference them with `--template custom_name`.
+
+## Error Handling
+
+The pipeline provides detailed feedback:
+- File validation errors
+- Missing dependencies
+- Citation resolution issues
+- LaTeX compilation problems
+
+## Integration
+
+### GitHub Actions
+```yaml
+name: Build PDFs
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Dependencies
+        run: |
+          sudo apt-get install -y pandoc texlive-xetex
+      - name: Build PDFs
+        run: md2pdf --input-dir content --output-dir dist
+```
+
+### Make Integration
+```makefile
+.PHONY: pdf clean
+pdf:
+	md2pdf --input-dir content --output-dir output --clean
+
+clean:
+	rm -rf output/ temp/
+```
 
 ---
 
-*Generated 2025-08-29. Replace placeholders as needed.*
+*Transform your Markdown documents into beautiful PDFs with a single command.*

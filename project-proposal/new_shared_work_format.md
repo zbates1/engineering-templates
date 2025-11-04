@@ -4,10 +4,7 @@ This file coordinates the collaborative work of all AI agents on the project.
 
 ## 1. Goal
 
-*A clear, one-sentence statement of the desired outcome.*
-
-**Example:**
-> Build a financial analysis system with user authentication, data processing, and report generation capabilities.
+Build a command-line Markdown-to-PDF processing pipeline with configurable input/output directories.
 
 ---
 
@@ -22,14 +19,21 @@ This file coordinates the collaborative work of all AI agents on the project.
 
 **Task ID Format:** T001-T999 (sequential)
 
-**Example List with Architecture-Aware Tasks:**
-- [ ] T001: Create models/user.py:User with properties (id, username, email) and methods (validate(), to_dict()) with tests
-- [ ] T002: Create services/auth_service.py:AuthService implementing login(credentials) → User interface with full test coverage
-- [ ] T003: Create controllers/user_controller.py handling requests → auth_service → user model flow with integration tests
-- [ ] T004: Create services/data_processor.py:DataProcessor implementing process(DataFrame) → ProcessedData with unit/integration tests
-- [ ] T005: Create utils/validator.py with validate_data(DataFrame) → ValidationResult used by DataProcessor with tests
-- [ ] T006: Implement data export pipeline with complete test coverage for all components
-- [ ] T007: Create authentication middleware with tests verifying token validation across components
+**Pipeline-Specific Tasks Based on Enhanced Architecture:**
+- [x] T001: Create src/cli/argument_parser.py with parse_args() → PipelineConfig and path validation
+- [x] T002: Create src/validators/file_validator.py implementing markdown validation and asset checking
+- [x] T003: Create src/processors/pandoc_processor.py with process_file() and dependency validation
+- [x] T004: Create src/utils/file_manager.py for .md discovery and asset management
+- [x] T005: Create src/utils/template_loader.py with template loading and metadata extraction
+- [x] T006: Create src/monitoring/logger.py with structured logging for pipeline events
+- [x] T007: Create src/monitoring/progress_tracker.py for processing progress
+- [x] T008: Create src/monitoring/health_checker.py for dependency and resource validation
+- [x] T009: Create src/recovery/error_handler.py with error classification and recovery strategies
+- [x] T010: Create src/recovery/retry_manager.py with exponential backoff retry logic
+- [x] T011: Create src/recovery/checkpoint_manager.py for processing state persistence
+- [x] T012: Create src/cli/pipeline_runner.py orchestrating full pipeline with robustness features
+- [WIP:Kyle] T013: Create src/utils/file_processor.py with sequential file processing and checkpoint integration
+- [ ] T014: Implement comprehensive test suite covering all robustness scenarios
 
 ---
 
@@ -61,3 +65,21 @@ This file coordinates the collaborative work of all AI agents on the project.
 `[Test Agent | TIME] Action: Created comprehensive test suite with 15 unit tests and 8 integration tests covering all edge cases and ensuring 100% code coverage. Next: Run tests.`
 `[Code | TIME] Action: ...` 
 `[Agent | TIME] Action: ...`
+
+---
+
+[Manager Agent | 2025-09-05 15:30] Action: SCOPE CHANGE. Updated requirements and architecture. Next: Agents re-evaluate tasks.
+[Isaac | 2025-09-05 15:45] Action: Enhanced architecture.md with robust pipeline features, monitoring, recovery. Created 14 implementation tasks. Next: T001.
+[Kyle | 2025-09-05 16:00] Action: Created src/cli/argument_parser.py with PipelineConfig, path validation, 25 tests pass. Next: T003.
+[Isaac | 2025-09-05 16:15] Action: Created src/validators/file_validator.py with comprehensive validation, 22 tests pass. Next: T004.
+[Manager_Agent | 2025-09-05 16:30] Action: Removed batch processing requirement from goal and task descriptions. Next: Agents continue current work.
+[Isaac | 2025-09-05 16:45] Action: Created src/utils/file_manager.py with file discovery, asset management, 28 tests pass. Next: T005.
+[Isaac | 2025-09-05 17:00] Action: Created src/utils/template_loader.py with template loading, metadata extraction, 27 tests pass. Next: T006.
+[Kyle | 2025-09-05 17:15] Action: Created src/processors/pandoc_processor.py with processing, dependency validation, 24 core tests pass. Next: T006.
+[Isaac | 2025-09-05 17:30] Action: Created src/monitoring/progress_tracker.py with real-time tracking, ETA calculation, 31 tests pass. Next: T008.
+[Kyle | 2025-09-05 17:45] Action: Created src/monitoring/logger.py with structured logging, JSON format, 25 tests pass. Next: T008.
+[Kyle | 2025-09-06 15:03] Action: Created src/recovery/error_handler.py with error classification, recovery strategies, 20 tests pass. Next: T011.
+[Greta | 2025-09-06 12:00] Action: Created src/recovery/retry_manager.py with exponential backoff, 37 tests pass. Next: T011.
+[Isaac | 2025-09-06 15:15] Action: Created src/monitoring/health_checker.py with dependency validation, resource monitoring, 41 tests pass. Next: T013.
+[Greta | 2025-09-06 15:30] Action: Created src/cli/pipeline_runner.py with full robustness integration, 14 tests pass. Next: T013.
+[Kyle | 2025-09-06 15:33] Action: Created src/recovery/checkpoint_manager.py with state persistence, recovery, 21 tests pass. Next: T013.
